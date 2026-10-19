@@ -1,0 +1,140 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Announcement Management</h1>
+    <p>Create, view and delete student announcements.</p>
+</section>
+
+
+<!-- Add announcement -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Post Announcement</h2>
+    </div>
+
+    <form action="{{ url_for('add_announcement') }}"
+          method="POST"
+          class="add-student-form">
+
+        <!-- Announcement title -->
+        <input type="text"
+               name="title"
+               placeholder="Announcement Title"
+               required>
+
+        <!-- Announcement message -->
+        <textarea name="message"
+                  placeholder="Enter announcement message"
+                  required></textarea>
+
+        <!-- Audience -->
+        <select name="audience" required>
+            <option value="">Select Audience</option>
+            <option value="Students">Students</option>
+            <option value="All Students">All Students</option>
+        </select>
+
+        <!-- Submit -->
+        <button type="submit"
+                class="view-button">
+            + Post Announcement
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Existing announcements -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Announcements</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Audience</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for announcement in announcements %}
+
+                    <tr>
+
+                        <td>
+                            {{ announcement.title }}
+                        </td>
+
+                        <td>
+                            {{ announcement.message }}
+                        </td>
+
+                        <td>
+                            {{ announcement.audience }}
+                        </td>
+
+                        <td>
+                            {{ announcement.announcement_date }}
+                        </td>
+
+                        <td>
+                            {{ announcement.status }}
+                        </td>
+
+                        <!-- Delete announcement -->
+                        <td>
+
+                            <form
+                                action="{{ url_for(
+                                    'delete_announcement',
+                                    announcement_id=announcement.id
+                                ) }}"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="view-button">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="6">
+                            No announcements found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

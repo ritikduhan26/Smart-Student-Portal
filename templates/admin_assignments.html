@@ -1,0 +1,236 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Assignment Management</h1>
+    <p>Add assignments and view students enrolled in each module.</p>
+</section>
+
+
+<!-- Add Assignment Form -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Add Assignment</h2>
+    </div>
+
+    <form
+        action="{{ url_for('add_assignment') }}"
+        method="POST"
+        class="add-student-form"
+    >
+
+        <!-- Module -->
+        <div class="form-group">
+            <label for="module_id">Module</label>
+
+            <select
+                id="module_id"
+                name="module_id"
+                required
+            >
+                <option value="">Select a module</option>
+
+                {% for module in modules %}
+                    <option value="{{ module.id }}">
+                        {{ module.module_name }}
+                        ({{ module.module_code }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Assignment Title -->
+        <div class="form-group">
+            <label for="title">Assignment Title</label>
+
+            <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Enter assignment title"
+                required
+            >
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="description">Description</label>
+
+            <textarea
+                id="description"
+                name="description"
+                rows="4"
+                placeholder="Enter assignment description"
+            ></textarea>
+        </div>
+
+        <!-- Deadline -->
+        <div class="form-group">
+            <label for="deadline">Deadline</label>
+
+            <input
+                type="date"
+                id="deadline"
+                name="deadline"
+                required
+            >
+        </div>
+
+        <!-- Submit -->
+        <div class="form-group">
+            <button type="submit" class="view-button">
+                Add Assignment
+            </button>
+        </div>
+
+    </form>
+
+</section>
+
+
+<!-- Existing Assignments -->
+<section class="table-card" style="margin-top: 25px;">
+
+    <div class="section-title">
+        <h2>Existing Assignments</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Module Code</th>
+                    <th>Assignment</th>
+                    <th>Description</th>
+                    <th>Deadline</th>
+                    <th>Students</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for assignment in assignment_records %}
+
+                <tr>
+
+                    <td>
+                        {{ assignment.module_name }}
+                    </td>
+
+                    <td>
+                        {{ assignment.module_code }}
+                    </td>
+
+                    <td>
+                        {{ assignment.title }}
+                    </td>
+
+                    <td>
+                        {{ assignment.description }}
+                    </td>
+
+                    <td>
+                        {{ assignment.deadline }}
+                    </td>
+
+                    <!-- View Students Button -->
+                    <td>
+
+                        <button
+                            type="button"
+                            class="view-button"
+                            onclick="toggleStudents('students-{{ assignment.id }}', this)"
+                            aria-expanded="false"
+                            aria-controls="students-{{ assignment.id }}"
+                        >
+                            View Students
+                        </button>
+
+                        <!-- Hidden student list -->
+                        <div
+                            id="students-{{ assignment.id }}"
+                            style="display: none; margin-top: 12px;"
+                        >
+
+                            {% set enrolled_students = assignment_students.get(
+                                assignment.id, []
+                            ) %}
+
+                            {% if enrolled_students %}
+
+                                {% for student in enrolled_students %}
+
+                                    <p style="margin-bottom: 8px;">
+                                        <strong>
+                                            {{ student.full_name }}
+                                        </strong>
+
+                                        <span style="color: #666;">
+                                            ({{ student.student_number }})
+                                        </span>
+                                    </p>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <p>No students enrolled in this module.</p>
+
+                            {% endif %}
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="6">
+                        No assignments found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- JavaScript for View Students -->
+<script>
+    function toggleStudents(elementId, button) {
+
+        const studentList = document.getElementById(elementId);
+
+        if (!studentList) {
+            return;
+        }
+
+        const isHidden = studentList.style.display === "none";
+
+        if (isHidden) {
+            studentList.style.display = "block";
+            button.textContent = "Hide Students";
+            button.setAttribute("aria-expanded", "true");
+        } else {
+            studentList.style.display = "none";
+            button.textContent = "View Students";
+            button.setAttribute("aria-expanded", "false");
+        }
+    }
+</script>
+
+{% endblock %}

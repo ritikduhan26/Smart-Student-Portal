@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic settings for the admin portal -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Portal</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Admin sidebar and navigation -->
+    <aside class="sidebar">
+
+        <!-- Logged-in administrator details -->
+        <div class="student-profile">
+
+            <div class="profile-circle">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+            <h3>{{ session["name"] }}</h3>
+            <p>{{ session["email"] }}</p>
+
+        </div>
+
+
+        <!-- Main admin navigation -->
+        <nav class="sidebar-menu">
+
+            <a href="{{ url_for('admin_dashboard') }}">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('admin_students') }}">
+                <i class="fa-solid fa-users"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="{{ url_for('admin_attendance') }}">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="{{ url_for('admin_grades') }}">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Grades</span>
+            </a>
+
+            <a href="{{ url_for('admin_assignments') }}">
+                <i class="fa-solid fa-book"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="{{ url_for('admin_announcements') }}">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Announcements</span>
+            </a>
+
+            <!-- Clears the session using the Flask logout route -->
+            <a href="{{ url_for('logout') }}" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main admin area -->
+    <main class="main-content">
+
+        <!-- Simple top bar -->
+        <header class="topbar">
+
+            <div class="left-header">
+                <h2>Admin Portal</h2>
+            </div>
+
+            <!-- Shows the current administrator -->
+            <div class="mini-profile">
+
+                <div class="mini-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div>
+                    <strong>{{ session["name"] }}</strong>
+                    <p>Administrator</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Content from each admin page appears here -->
+        <section class="dashboard-content">
+
+            {% block content %}
+            {% endblock %}
+
+        </section>
+
+    </main>
+
+    <!-- Javascript -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

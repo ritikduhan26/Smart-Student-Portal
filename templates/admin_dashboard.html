@@ -1,0 +1,147 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<div class="welcome-section">
+
+    <h1>Admin Dashboard</h1>
+
+    <p>
+        Manage students, attendance, grades,
+        assignments and announcements.
+    </p>
+
+</div>
+
+
+<!-- Admin summary -->
+<div class="summary-cards">
+
+    <!-- Total students -->
+    <div class="summary-card">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div>
+            <p>Total Students</p>
+            <h2>{{ total_students }}</h2>
+        </div>
+
+    </div>
+
+
+    <!-- Average attendance -->
+    <div class="summary-card">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+        </div>
+
+        <div>
+            <p>Average Attendance</p>
+            <h2>{{ average_attendance }}%</h2>
+        </div>
+
+    </div>
+
+
+    <!-- Total assignments -->
+    <div class="summary-card">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-book"></i>
+        </div>
+
+        <div>
+            <p>Assignments</p>
+            <h2>{{ total_assignments }}</h2>
+        </div>
+
+    </div>
+
+
+    <!-- Total announcements -->
+    <div class="summary-card">
+
+        <div class="card-icon">
+            <i class="fa-solid fa-bullhorn"></i>
+        </div>
+
+        <div>
+            <p>Announcements</p>
+            <h2>{{ total_announcements }}</h2>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Recent students -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Recent Students</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for student in recent_students %}
+
+                <tr>
+
+                    <td>
+                        {{ student.student_number }}
+                    </td>
+
+                    <td>
+                        {{ student.full_name }}
+                    </td>
+
+                    <td>
+                        {{ student.email }}
+                    </td>
+
+                    <td>
+                        {{ student.course }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="4">
+                        No students available.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

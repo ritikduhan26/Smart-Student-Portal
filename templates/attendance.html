@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Attendance</h1>
+    <p>View your attendance records.</p>
+</section>
+
+
+<!-- Attendance table -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>My Attendance</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <!-- Table headings -->
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Module Code</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- Attendance records received from Flask -->
+                {% for record in attendance_records %}
+
+                    <tr>
+                        <td>{{ record.module_name }}</td>
+                        <td>{{ record.module_code }}</td>
+                        <td>{{ record.attendance_date }}</td>
+
+                        <td>
+                            {% if record.status == "Present" %}
+                                <span class="status-present">
+                                    Present
+                                </span>
+                            {% else %}
+                                <span class="status-absent">
+                                    {{ record.status }}
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% else %}
+
+                    <!-- Displayed when no attendance exists -->
+                    <tr>
+                        <td colspan="4">
+                            No attendance records found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

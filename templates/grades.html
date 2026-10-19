@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Grades</h1>
+    <p>View your assessment results and grades.</p>
+</section>
+
+
+<!-- Grades table -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>My Grades</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <!-- Table headings -->
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Module Code</th>
+                    <th>Assessment</th>
+                    <th>Grade</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- Grade records received from Flask -->
+                {% for record in grade_records %}
+
+                    <tr>
+                        <td>{{ record.module_name }}</td>
+
+                        <td>
+                            {{ record.module_code }}
+                        </td>
+
+                        <td>
+                            {{ record.assessment_name }}
+                        </td>
+
+                        <td>
+                            {{ record.grade }}%
+                        </td>
+
+                        <td>
+                            {% if record.result == "Pass" %}
+                                <span class="status-present">
+                                    Pass
+                                </span>
+                            {% else %}
+                                <span class="status-absent">
+                                    {{ record.result }}
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% else %}
+
+                    <!-- Shown if the student has no grades -->
+                    <tr>
+                        <td colspan="5">
+                            No grade records found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Grade Management</h1>
+    <p>Add and view student grade records.</p>
+</section>
+
+
+<!-- Add grade section -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Add Grade</h2>
+    </div>
+
+    <form action="{{ url_for('add_grade') }}"
+          method="POST"
+          class="add-student-form">
+
+        <!-- Select student -->
+        <select name="student_id" required>
+            <option value="">Select Student</option>
+
+            {% for student in students %}
+                <option value="{{ student.id }}">
+                    {{ student.student_number }} -
+                    {{ student.full_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <!-- Select module -->
+        <select name="module_id" required>
+            <option value="">Select Module</option>
+
+            {% for module in modules %}
+                <option value="{{ module.id }}">
+                    {{ module.module_code }} -
+                    {{ module.module_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <!-- Assessment name -->
+        <input type="text"
+               name="assessment_name"
+               placeholder="Assessment Name"
+               required>
+
+
+        <!-- Grade -->
+        <input type="number"
+               name="grade"
+               placeholder="Grade"
+               min="0"
+               max="100"
+               step="0.01"
+               required>
+
+
+        <!-- Result -->
+        <select name="result" required>
+            <option value="">Select Result</option>
+            <option value="Pass">Pass</option>
+            <option value="Fail">Fail</option>
+        </select>
+
+
+        <!-- Submit button -->
+        <button type="submit"
+                class="view-button">
+            + Add Grade
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Grade records -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Grade Records</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Module</th>
+                    <th>Module Code</th>
+                    <th>Assessment</th>
+                    <th>Grade</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for record in grade_records %}
+
+                    <tr>
+                        <td>{{ record.student_number }}</td>
+                        <td>{{ record.full_name }}</td>
+                        <td>{{ record.module_name }}</td>
+                        <td>{{ record.module_code }}</td>
+                        <td>{{ record.assessment_name }}</td>
+                        <td>{{ record.grade }}%</td>
+                        <td>{{ record.result }}</td>
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="7">
+                            No grade records found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

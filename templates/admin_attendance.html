@@ -1,0 +1,130 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Attendance Management</h1>
+    <p>Add and view student attendance records.</p>
+</section>
+
+
+<!-- Add attendance section -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Add Attendance</h2>
+    </div>
+
+    <form action="{{ url_for('add_attendance') }}"
+          method="POST"
+          class="add-student-form">
+
+        <!-- Select student -->
+        <select name="student_id" required>
+            <option value="">Select Student</option>
+
+            {% for student in students %}
+                <option value="{{ student.id }}">
+                    {{ student.student_number }} -
+                    {{ student.full_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <!-- Select module -->
+        <select name="module_id" required>
+            <option value="">Select Module</option>
+
+            {% for module in modules %}
+                <option value="{{ module.id }}">
+                    {{ module.module_code }} -
+                    {{ module.module_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <!-- Attendance date -->
+        <input type="date"
+               name="attendance_date"
+               required>
+
+
+        <!-- Attendance status -->
+        <select name="status" required>
+            <option value="">Select Status</option>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+        </select>
+
+
+        <!-- Submit button -->
+        <button type="submit"
+                class="view-button">
+            + Add Attendance
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- Attendance records -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Attendance Records</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Module</th>
+                    <th>Module Code</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for record in attendance_records %}
+
+                    <tr>
+                        <td>{{ record.student_number }}</td>
+                        <td>{{ record.full_name }}</td>
+                        <td>{{ record.module_name }}</td>
+                        <td>{{ record.module_code }}</td>
+                        <td>{{ record.attendance_date }}</td>
+
+                        <td>
+                            {% if record.status == "Present" %}
+                                <span class="status-present">
+                                    Present
+                                </span>
+                            {% else %}
+                                <span class="status-absent">
+                                    {{ record.status }}
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

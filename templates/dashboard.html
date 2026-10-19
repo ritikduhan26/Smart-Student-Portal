@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Welcome section -->
+<section class="welcome-section">
+
+    <h1>
+        Welcome, {{ session.get('name', 'Student') }}
+    </h1>
+
+    <p>
+        Here is an overview of your academic information.
+    </p>
+
+</section>
+
+
+<!-- Dashboard summary cards -->
+<section class="summary-grid">
+
+    <!-- Attendance -->
+    <article class="summary-card">
+
+        <h3>Attendance</h3>
+
+        <p class="summary-number">
+            {{ attendance_percentage }}%
+        </p>
+
+        <a href="{{ url_for('attendance') }}"
+           class="view-button">
+            View Attendance
+        </a>
+
+    </article>
+
+
+    <!-- Upcoming assignments -->
+    <article class="summary-card">
+
+        <h3>Upcoming Assignments</h3>
+
+        <p class="summary-number">
+            {{ upcoming_assignments }}
+        </p>
+
+        <a href="{{ url_for('assignments') }}"
+           class="view-button">
+            View Assignments
+        </a>
+
+    </article>
+
+
+    <!-- Average grade -->
+    <article class="summary-card">
+
+        <h3>Average Grade</h3>
+
+        <p class="summary-number">
+            {{ average_grade }}%
+        </p>
+
+        <a href="{{ url_for('grades') }}"
+           class="view-button">
+            View Grades
+        </a>
+
+    </article>
+
+</section>
+
+
+<!-- Quick access section -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Quick Access</h2>
+    </div>
+
+    <div class="summary-grid">
+
+        <!-- Timetable -->
+        <article class="summary-card">
+
+            <h3>Timetable</h3>
+
+            <p>
+                View your weekly class schedule.
+            </p>
+
+            <a href="{{ url_for('timetable') }}"
+               class="view-button">
+                View Timetable
+            </a>
+
+        </article>
+
+
+        <!-- Messages -->
+        <article class="summary-card">
+
+            <h3>Messages</h3>
+
+            <p>
+                View the latest announcements.
+            </p>
+
+            <a href="{{ url_for('messages') }}"
+               class="view-button">
+                View Messages
+            </a>
+
+        </article>
+
+
+        <!-- Profile -->
+        <article class="summary-card">
+
+            <h3>Profile</h3>
+
+            <p>
+                View your student information.
+            </p>
+
+            <a href="{{ url_for('profile') }}"
+               class="view-button">
+                View Profile
+            </a>
+
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

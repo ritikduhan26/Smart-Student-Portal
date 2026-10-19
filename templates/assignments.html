@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<div class="welcome-section">
+
+    <h1>Assignments</h1>
+
+    <p>View your upcoming academic assignments.</p>
+
+</div>
+
+
+<!-- Shows assignments for the student's enrolled modules -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Assignments</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Assignment</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- Display assignment records -->
+                {% for record in assignment_records %}
+
+                <tr>
+
+                    <td>
+                        {{ record.module_name }}
+                    </td>
+
+                    <td>
+                        {{ record.title }}
+                    </td>
+
+                    <td>
+                        {{ record.deadline }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <!-- Show when no assignments are available -->
+                <tr>
+                    <td colspan="3">No assignments found.</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- Page footer -->
+<footer>
+    <p>
+        © 2026 Smart Student Portal.
+        All rights reserved.
+    </p>
+</footer>
+
+{% endblock %}

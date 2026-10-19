@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<section class="welcome-section">
+    <h1>Messages & Announcements</h1>
+    <p>View the latest announcements and important updates.</p>
+</section>
+
+
+<!-- Announcements section -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Latest Announcements</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <!-- Table headings -->
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Audience</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- Announcements received from Flask -->
+                {% for announcement in announcements %}
+
+                    <tr>
+
+                        <td>
+                            {{ announcement.title }}
+                        </td>
+
+                        <td>
+                            {{ announcement.message }}
+                        </td>
+
+                        <td>
+                            {{ announcement.audience }}
+                        </td>
+
+                        <td>
+                            {{ announcement.announcement_date }}
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <!-- Shown when there are no announcements -->
+                    <tr>
+                        <td colspan="4">
+                            No announcements available.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

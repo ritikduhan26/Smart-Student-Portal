@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<div class="welcome-section">
+
+    <h1>My Profile</h1>
+
+    <p>
+        View your personal and academic information.
+    </p>
+
+</div>
+
+
+<!-- Profile section -->
+<div class="profile-page">
+
+    <!-- Student profile card -->
+    <section class="info-card profile-card">
+
+        <div class="profile-large-avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+        <h2>{{ student.full_name }}</h2>
+
+        <p>{{ student.course }} Student</p>
+
+    </section>
+
+
+    <!-- Personal information -->
+    <section class="table-card">
+
+        <div class="section-title">
+            <h2>Personal Information</h2>
+        </div>
+
+        <div class="profile-details">
+
+            <div class="profile-detail">
+                <span>Student ID</span>
+                <strong>
+                    {{ student.student_number }}
+                </strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Full Name</span>
+                <strong>
+                    {{ student.full_name }}
+                </strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Email</span>
+                <strong>
+                    {{ student.email }}
+                </strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Course</span>
+                <strong>
+                    {{ student.course }}
+                </strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Academic Year</span>
+                <strong>
+                    {{ student.academic_year }}
+                </strong>
+            </div>
+
+            <div class="profile-detail">
+                <span>Study Mode</span>
+                <strong>
+                    {{ student.study_mode }}
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Academic summary -->
+<section class="table-card profile-academic">
+
+    <div class="section-title">
+        <h2>Academic Summary</h2>
+    </div>
+
+    <div class="profile-details">
+
+        <!-- Calculated from attendance records -->
+        <div class="profile-detail">
+
+            <span>Overall Attendance</span>
+
+            <strong>
+                {{ attendance_percentage }}%
+            </strong>
+
+        </div>
+
+
+        <!-- Calculated from student grades -->
+        <div class="profile-detail">
+
+            <span>Average Grade</span>
+
+            <strong>
+                {{ average_grade }}%
+            </strong>
+
+        </div>
+
+
+        <!-- Counted from enrolments -->
+        <div class="profile-detail">
+
+            <span>Current Modules</span>
+
+            <strong>
+                {{ current_modules }}
+            </strong>
+
+        </div>
+
+
+        <!-- Counted from upcoming assignments -->
+        <div class="profile-detail">
+
+            <span>Assignments Due</span>
+
+            <strong>
+                {{ assignments_due }}
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Page footer -->
+<footer>
+
+    <p>
+        © 2026 Smart Student Portal.
+        All rights reserved.
+    </p>
+
+</footer>
+
+{% endblock %}

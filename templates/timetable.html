@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- Page heading -->
+<div class="welcome-section">
+
+    <h1>Timetable</h1>
+
+    <p>
+        View your weekly class timetable.
+    </p>
+
+</div>
+
+
+<!-- Timetable for the student's enrolled modules -->
+<section class="table-card">
+
+    <div class="section-title">
+        <h2>Weekly Timetable</h2>
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Module</th>
+                    <th>Module Code</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Room</th>
+                    <th>Lecturer</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for record in timetable_records %}
+
+                <tr>
+
+                    <td>
+                        {{ record.day_name }}
+                    </td>
+
+                    <td>
+                        {{ record.module_name }}
+                    </td>
+
+                    <td>
+                        {{ record.module_code }}
+                    </td>
+
+                    <td>
+                        {{ record.start_time }}
+                    </td>
+
+                    <td>
+                        {{ record.end_time }}
+                    </td>
+
+                    <td>
+                        {{ record.room }}
+                    </td>
+
+                    <td>
+                        {{ record.lecturer }}
+                    </td>
+
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="7">
+                        No timetable records available.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- Page footer -->
+<footer>
+
+    <p>
+        © 2026 Smart Student Portal.
+        All rights reserved.
+    </p>
+
+</footer>
+
+{% endblock %}

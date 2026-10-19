@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Portal</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Student sidebar -->
+    <aside class="sidebar">
+
+        <!-- Logged-in student details -->
+        <div class="student-profile">
+
+            <div class="profile-circle">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <h2>
+                {{ session.get('name', 'Student') }}
+            </h2>
+
+            <p>
+                {{ session.get('email', '') }}
+            </p>
+
+        </div>
+
+
+        <!-- Main student navigation -->
+        <nav class="sidebar-menu">
+
+            <a href="{{ url_for('dashboard') }}">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="{{ url_for('attendance') }}">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Attendance</span>
+            </a>
+
+            <a href="{{ url_for('assignments') }}">
+                <i class="fa-solid fa-book"></i>
+                <span>Assignments</span>
+            </a>
+
+            <a href="{{ url_for('grades') }}">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Grades</span>
+            </a>
+
+            <a href="{{ url_for('timetable') }}">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Timetable</span>
+            </a>
+
+            <a href="{{ url_for('messages') }}">
+                <i class="fa-solid fa-bell"></i>
+                <span>Messages</span>
+            </a>
+
+            <a href="{{ url_for('profile') }}">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <!-- Logout -->
+            <a href="{{ url_for('logout') }}"
+               class="logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main student area -->
+    <main class="main-content">
+
+        <!-- Top navigation bar -->
+        <header class="topbar">
+
+            <div class="left-header">
+                <h2>Student Portal</h2>
+            </div>
+
+            <!-- Logged-in student -->
+            <div class="mini-profile">
+
+                <div class="mini-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        {{ session.get('name', 'Student') }}
+                    </strong>
+
+                    <p>Student</p>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Content from each student page -->
+        <section class="dashboard-content">
+
+            {% block content %}
+            {% endblock %}
+
+        </section>
+
+    </main>
+    
+    <!-- Javascript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

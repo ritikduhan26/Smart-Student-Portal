@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Student Portal</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="login-body">
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <!-- Login icon -->
+            <div class="login-logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <!-- Login heading -->
+            <h1>Student Portal</h1>
+
+            <p class="login-subtitle">
+                Sign in to access your academic information.
+            </p>
+
+
+            <!-- Login error -->
+            {% if error %}
+
+                <div class="login-error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- Login form -->
+            <form action="{{ url_for('login') }}"
+                  method="POST">
+
+                <!-- Email -->
+                <div class="input-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <input type="email"
+                               id="email"
+                               name="email"
+                               placeholder="Enter your email"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Login options -->
+                <div class="login-options">
+
+                    <label class="remember-me">
+
+                        <input type="checkbox"
+                               onclick="togglePassword()">
+
+                        Show Password
+
+                    </label>
+
+                </div>
+
+
+                <!-- Login button -->
+                <button type="submit"
+                        class="login-button">
+                    Sign In
+                </button>
+
+            </form>
+
+
+            <p class="login-help">
+                Smart Student Portal
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}">
+    </script>
+
+</body>
+
+</html>
