@@ -183,6 +183,10 @@ Log in using a valid account configured in your local database.
 
 ---
 
+## Troubleshooting
+
+**Internal Server Error when clicking Login:** the `.env` file is missing or empty, MySQL is not running, or the `student_portal` database has not been imported. Create `.env` as in step 3, start MySQL, import `student_portal.sql`, then restart `python app.py`.
+
 ## How to Use the Portal
 
 1. Log in as an administrator.
