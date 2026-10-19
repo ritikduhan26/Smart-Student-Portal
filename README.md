@@ -140,12 +140,10 @@ The included `student_portal.sql` export contains table definitions and sample r
 Set the values for your local environment. For example:
 
 ```dotenv
-MYSQL_HOST=localhost
-MYSQL_USER=your_mysql_username
 MYSQL_PASSWORD=your_mysql_password
-MYSQL_DATABASE=student_portal
 SECRET_KEY=replace_with_a_long_random_secret
 ```
+The app connects to MySQL on localhost as root, using the student_portal database. These values are set in app.py.
 
 A secret key can be generated with:
 
