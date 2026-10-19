@@ -137,7 +137,7 @@ The included `student_portal.sql` export contains table definitions and sample r
 
 ### 3. Configure environment variables
 
-Copy `.env.example` to `.env` and set the values for your local environment. For example:
+Set the values for your local environment. For example:
 
 ```dotenv
 MYSQL_HOST=localhost
